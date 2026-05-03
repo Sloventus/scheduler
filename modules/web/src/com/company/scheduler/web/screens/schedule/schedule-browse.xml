@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://scheduleBrowse.caption"
+        focusComponent="schedulesTable"
+        messagesPack="com.company.scheduler.web.screens.schedule">
+    <data readOnly="true">
+        <collection id="schedulesDc"
+                    class="com.company.scheduler.entity.Schedule">
+            <view extends="_local">
+                <property name="subject" view="_minimal"/>
+                <property name="teacher" view="_minimal"/>
+                <property name="students" view="_minimal"/>
+            </view>
+            <loader id="schedulesDl">
+                <query>
+                    <![CDATA[select e from scheduler_Schedule e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="schedulesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="schedulesTable"
+                dataLoader="schedulesDl">
+            <properties include=".*"/>
+        </filter>
+        <dataGrid id="schedulesTable"
+                  width="100%"
+                  dataContainer="schedulesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column property="subject" id="subject"/>
+                <column property="teacher" id="teacher"/>
+                <column property="duration" id="duration"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="schedulesTable.create"/>
+                <button id="editBtn" action="schedulesTable.edit"/>
+                <button id="removeBtn" action="schedulesTable.remove"/>
+            </buttonsPanel>
+        </dataGrid>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

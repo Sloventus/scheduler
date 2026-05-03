@@ -1,0 +1,2 @@
+alter table SCHEDULE_STUDENT_LINK add constraint FK_SCHSTU_ON_SCHEDULE foreign key (SCHEDULE_ID) references SCHEDULER_SCHEDULE(ID);
+alter table SCHEDULE_STUDENT_LINK add constraint FK_SCHSTU_ON_STUDENT foreign key (STUDENT_ID) references SCHEDULER_STUDENT(ID);
